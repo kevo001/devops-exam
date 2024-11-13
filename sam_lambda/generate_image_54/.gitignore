@@ -13,3 +13,7 @@ __pycache__/
 
 # GitHub Actions secrets (if applicable)
 *.env
+
+__init__.py
+events/
+tests/
