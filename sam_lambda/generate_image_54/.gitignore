@@ -1,0 +1,15 @@
+# Ignore virtual environment folders
+.venv/
+env/
+
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*.pyo
+
+# AWS SAM build artifacts
+.aws-sam/
+
+
+# GitHub Actions secrets (if applicable)
+*.env

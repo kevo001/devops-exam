@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  generate_image_54
+
+  Sample SAM Template for generate_image_54
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+    LoggingConfig:
+      LogFormat: JSON
+    Tracing: Active
+  Api:
+    TracingEnabled: true
+
+Resources:
+  GenerateImageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          S3_BUCKET_NAME: "pgr301-couch-explorers"
+          CANDIDATE_NUMBER: "54"
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
+        - Ref: BedrockFullAccessPolicy
+        - Ref: S3FullAccessPolicy
+      Events:
+        GenerateApi:
+          Type: Api
+          Properties:
+            Path: /generate-image
+            Method: POST
+  
+  BedrockFullAccessPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: bedrock:*
+            Resource: '*'
+
+  S3FullAccessPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: s3:*
+            Resource: '*'
+
+Outputs:
+  GenerateApi:
+    Description: API Gateway endpoint URL for Prod stage for Generate function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/generate-image/
+  GenerateFunctionArn:
+    Description: Generate Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+        - GenerateImageFunction
+        - Arn
+  GenerateFunctionIamRole:
+    Description: Implicit IAM Role created for GenerateImage function
+    Value:
+      Fn::GetAtt:
+        - GenerateImageFunctionRole
+        - Arn
+        
+        
