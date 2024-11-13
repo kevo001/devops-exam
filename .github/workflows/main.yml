@@ -28,10 +28,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools
           
-      - name: aws bootstrap
-        run: |
-          pip install aws-cfn-bootstrap
-      
       # Install dependencies from the updated requirements.txt
       - name: Install Dependencies
         run: |
