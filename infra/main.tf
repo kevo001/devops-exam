@@ -120,8 +120,8 @@ resource "aws_lambda_function" "process_image_request" {
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "image_processor.lambda_handler"
   runtime       = "python3.9"
-  memory_size   = 256
-  timeout       = 60
+  memory_size   = 128
+  timeout       = 30
 
   environment {
     variables = {
@@ -139,4 +139,57 @@ resource "aws_lambda_event_source_mapping" "sqs_lambda_trigger" {
   event_source_arn = aws_sqs_queue.image_request_queue.arn
   function_name    = aws_lambda_function.process_image_request.arn
   batch_size       = 10
+}
+
+
+# Exercise 4
+
+# Variable for the alarm email only
+variable "alarm_email" {
+  description = "Email address to receive CloudWatch alarm notifications"
+  type        = string
+}
+
+# Threshold for ApproximateAgeOfOldestMessage
+variable "age_of_oldest_message_threshold" {
+  description = "Threshold in seconds for ApproximateAgeOfOldestMessage metric to trigger the alarm"
+  type        = number
+  default     = 180 
+}
+
+# SNS Topic and Subscription
+resource "aws_sns_topic" "sqs_alarm_topic" {
+  name = "sqs_alarm_topic_54"  
+}
+
+resource "aws_sns_topic_subscription" "sqs_alarm_email" {
+  topic_arn = aws_sns_topic.sqs_alarm_topic.arn
+  protocol  = "email"
+  endpoint  = var.alarm_email 
+}
+
+# CloudWatch Alarm for ApproximateAgeOfOldestMessage metric
+resource "aws_cloudwatch_metric_alarm" "sqs_oldest_message_age" {
+  alarm_name          = "sqs_oldest_message_age_alarm_54"  
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  metric_name         = "ApproximateAgeOfOldestMessage"
+  namespace           = "AWS/SQS"
+  period              = 60
+  statistic           = "Maximum"
+  threshold           = var.age_of_oldest_message_threshold
+  dimensions = {
+    QueueName = aws_sqs_queue.image_request_queue.name
+  }
+  alarm_description = "Alarm if the oldest message in the queue is older than the defined threshold"
+  alarm_actions     = [aws_sns_topic.sqs_alarm_topic.arn]
+}
+
+# Outputs
+output "sqs_alarm_topic_arn" {
+  value = aws_sns_topic.sqs_alarm_topic.arn
+}
+
+output "sqs_oldest_message_age_alarm" {
+  value = aws_cloudwatch_metric_alarm.sqs_oldest_message_age.alarm_name
 }
