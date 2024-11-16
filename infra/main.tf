@@ -148,6 +148,7 @@ resource "aws_lambda_event_source_mapping" "sqs_lambda_trigger" {
 variable "alarm_email" {
   description = "Email address to receive CloudWatch alarm notifications"
   type        = string
+  default     = "test-email@example.com"
 }
 
 # Threshold for ApproximateAgeOfOldestMessage
