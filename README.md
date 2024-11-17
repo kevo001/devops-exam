@@ -3,6 +3,9 @@
 **Exercise 1:**
 - **HTTP Endepunkt:**
   https://ifae21edv2.execute-api.eu-west-1.amazonaws.com/Prod/generate-image/
+
+Example prompt on Postman:
+{"prompt":"a big hippo driving a car"}
   
 - **Workflow run:**
   https://github.com/kevo001/devops-exam/actions/runs/11810564556
