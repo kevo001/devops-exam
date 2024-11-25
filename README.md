@@ -39,10 +39,10 @@ Example prompt on Postman:
   
   I en serverless arkitektur brytes applikasjonen ned i små funksjoner, der hver funksjon har sin egen livssyklus. Dette gjør det mulig med raskere utviklings- og utrullingssykluser
   fordi funksjonene er mindre komplekse og enklere å deploye. Automatiseringsverktøy som Serverless Framework og AWS CodePipeline gir gode verktøy for å administrere slike systemer.
-  Samtidig kan CI/CD bli mer komplekst fordi hver funksjon trenger sin egen pipeline for testing, utrulling og overvåkning. Koordinering av alle disse komponentene kan derfor være tidkrevende.
+  Samtidig kan CI/CD bli mer komplekst fordi hver funksjon trenger sin egen pipeline for testing, utrulling og overvåkning. Koordinering av alle disse komponentene kan derfor være tidkrevende (TatvaSoft, 2024).
   
   Mikrotjenester består av færre, men større deploybare enheter. Disse er ofte mer selvstendige og lettere å håndtere med standard CI/CD-strategier.
-  Ulempen er at mikrotjenester som regel er mer komplekse å bygge og teste i sin helhet, noe som kan føre til lengre utrullingssykluser sammenlignet med serverless.
+  Ulempen er at mikrotjenester som regel er mer komplekse å bygge og teste i sin helhet, noe som kan føre til lengre utrullingssykluser sammenlignet med serverless (Ninetailed, 2024).
   
   Serverless gir raskere deployments, men krever mer avanserte pipelines. Mikrotjenester er enklere å håndtere i CI/CD, men krever mer tid per deployment.
 
@@ -51,10 +51,10 @@ Example prompt on Postman:
   
   Overvåkning er et område hvor serverless og mikrotjenester skiller seg mye. I serverless arkitektur er det utfordrende å få oversikt, siden applikasjonen består av mange små, distribuerte funksjoner.
   Logging og sporing blir derfor fragmentert, og det kan være vanskelig å få et helhetlig bilde av systemet. Verktøy som AWS CloudWatch Logs og AWS X-Ray hjelper med logging og sporing, men det krever
-  mye innsats for å sette opp et effektivt overvåkningssystem.
+  mye innsats for å sette opp et effektivt overvåkningssystem (Lumigo, 2024).
 
   I mikrotjenester er overvåkning enklere fordi tjenestene dekker mer helhetlige deler av applikasjonen. Dette gjør det lettere å spore ytelse og finne feil. Verktøy som
-  Prometheus og Grafana fungerer godt, men ulempen er at kompleksiteten øker dersom det blir mange avhengigheter mellom tjenestene.
+  Prometheus og Grafana fungerer godt, men ulempen er at kompleksiteten øker dersom det blir mange avhengigheter mellom tjenestene (IBM, 2024).
 
   Serverless krever mer avanserte verktøy og strategier for overvåkning. Mikrotjenester er enklere å overvåke, men kan bli mye mer komplisert og utfordrende når avhengiheter blir komplekse.
 
@@ -62,10 +62,10 @@ Example prompt on Postman:
 - **Skalerbarhet og kostnadskontroll: Diskuter fordeler og ulemper med tanke på skalerbarhet, ressursutnyttelse, og kostnadsoptimalisering i en serverless kontra mikrotjenestebasert arkitektur.**
   
   Når det gjelder skalerbarhet så er serverless svært enkelt. Tjenestene blir skalert automatisk basert på behov uten at utviklerne trenger å administrere infrastrukturen.
-  Dette gir også en fleksibel kostnadsmodell, der man kun betaler for ressursene som faktisk blir brukt. Ulempen er at kostnadene kan bli uforutsigbare ved høy trafikk.
+  Dette gir også en fleksibel kostnadsmodell, der man kun betaler for ressursene som faktisk blir brukt. Ulempen er at kostnadene kan bli uforutsigbare ved høy trafikk (Lumigo, 2024).
 
   Mikrotjenester gir mer kontroll over skalering, men krever manuell konfigurasjon ofte ved hjelp av plattformer som Kubernetes. Selv om dette gir forutsigbare
-  kostnader så kan ressursutnyttelsen være mindre effektiv. Man må ofte planlegge for "worst-case"-belastning.
+  kostnader så kan ressursutnyttelsen være mindre effektiv. Man må ofte planlegge for "worst-case"-belastning (Orient Software, 2024).
 
   Serverless er kostnadseffektivt og blir skalert automatisk, men kan være uforutsigbart. Mikrotjenester gir mer kontroll og forutsigbare kostnader, men krever manuell administrasjon for å oppnå effektiv skalering.
 
@@ -73,9 +73,26 @@ Example prompt on Postman:
 - **Eierskap og ansvar: Hvordan påvirkes DevOps-teamets eierskap og ansvar for applikasjonens ytelse, pålitelighet og kostnader ved overgang til en serverless tilnærming sammenlignet med en mikrotjeneste-tilnærming?**
 
   Serverless gir mindre arbeid og ansvar siden skyleverandøren tar seg av infrastrukturen. Dette lar teamet fokusere mer på forretningslogikk og mindre på drift.
-  Med det derimot så kan begrenset kontroll over infrastrukturen være frustrerende for et team med spesifikke ytelsesbehov.
+  Med det derimot så kan begrenset kontroll over infrastrukturen være frustrerende for et team med spesifikke ytelsesbehov (IBM, 2024).
   
-  Mikrotjenester gir teamet full kontroll over infrastrukturen. Det gjør at man får større muligheter for tilpasning og optimalisering. Ulempen er at arbeidsmengden økes med tanke på drift, vedlikehold og feilsøking.
+  Mikrotjenester gir teamet full kontroll over infrastrukturen. Det gjør at man får større muligheter for tilpasning og optimalisering. Ulempen er at arbeidsmengden økes med tanke på drift, vedlikehold og feilsøking (Ninetailed, 2024).
 
   Serverless gir mindre arbeid og ansvar for et team, men gir mindre fleksibilitet. Mikrotjenester krever mer ansvar, men gir større muligheter for tilpasning.
 
+
+Referanseliste:
+
+- IBM. (2024). Serverless vs. microservices: Key differences and use cases. IBM Blogs.
+  https://www.ibm.com/blog/serverless-vs-microservices/
+
+- Lumigo. (2024). Serverless vs microservices: 4 differences and potential synergies.
+  https://lumigo.io/serverless-monitoring/serverless-vs-microservices-4-differences-and-potential-synergies/
+
+- Ninetailed. (2024). Serverless vs. microservices: A guide to modern architecture.
+  https://ninetailed.io/blog/serverless-vs-microservices/
+
+- Orient Software. (2024). Serverless vs. microservices: Key comparisons.
+  https://www.orientsoftware.com/blog/serverless-vs-microservices/
+
+- TatvaSoft. (2024). Microservices vs. serverless: What’s best for your application?
+  https://www.tatvasoft.com/outsourcing/2024/06/microservices-vs-serverless.html
